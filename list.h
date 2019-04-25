@@ -12,32 +12,61 @@ class List {
     private:
         Node<T>* head;
         Operation cmp;
+        int tamano = 0;
               
     public:
         List() : head(nullptr) {};
 
         bool find(T search, Node<T> **&pointer) {
-            // TODO
+            pointer = &head;
+            while(*pointer != nullptr && !cmp(search, (*pointer)->data)){
+                pointer = &((*pointer)->next);
+            }
+            return (*pointer)->data == search && *pointer != nullptr; 
         }
              
         bool insert(T data) {
-            // TODO
+            Node<T>* added = new Node<T>(data);
+            Node<T>** aux;
+            if(find(data,aux)){
+                return false;
+            }
+            tamano++;
+            added->next = *aux;
+            *aux = added;
+            return true;
+
         }
              
         bool remove(T item) {
-            // TODO
+            Node<T> **aux;
+            Node<T>* removed = *aux;
+            if(!find(item,aux)){
+                return false;
+            }
+            tamano--;
+            *aux = (*aux)->next;
+            delete removed;
+            return true;
         }  
              
         int size() {
-            // TODO
+            return tamano;
         }
 
         T operator[](int index) {
-            // TODO
+            Node<T>* aux = head;
+            for(int i = 0;i<index;i++){
+                aux = aux->next;
+                if(aux == nullptr){
+                    throw out_of_range("Segmentation fault");
+                }
+            }
+            return aux->data;
         }
 
         ~List() {
-            // TODO
+            head->killSelf();
         }         
 };
 
