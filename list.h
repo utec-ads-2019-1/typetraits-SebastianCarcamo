@@ -19,6 +19,7 @@ class List {
 
         bool find(T search, Node<T> **&pointer) {
             pointer = &head;
+            // No va a funcionar, por uqé estás llamando a !cmp?
             while(*pointer != nullptr && !cmp(search, (*pointer)->data)){
                 pointer = &((*pointer)->next);
             }
@@ -65,9 +66,10 @@ class List {
             return aux->data;
         }
 
-        ~List() {
+        /*~List() {
+            // Falta validar si head es null o no
             head->killSelf();
-        }         
+        } */        
 };
 
 #endif
