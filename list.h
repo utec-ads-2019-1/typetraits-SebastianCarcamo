@@ -15,6 +15,7 @@ class List {
         int tamano = 0;
               
     public:
+        // No mezclaste con master
         List() : head(nullptr) {};
 
         bool find(T search, Node<T> **&pointer) {
